@@ -1,2 +1,2 @@
 #pragma once
-string parseName(stringstream& in);
+string parseName(stringstream& file);

@@ -1,12 +1,12 @@
 #pragma once
-class Not : public SubExpression
+class NotOperator : public SubExpression
 {
 public:
-	Not(Expression* left, Expression* right) : SubExpression(left, right)
+	NotOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()
 	{
-		return !(left->evaluate());
+		return (left->evaluate() == 0);
 	}
 };

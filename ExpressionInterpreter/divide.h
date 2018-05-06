@@ -1,8 +1,8 @@
 #pragma once
-class Divide : public SubExpression
+class DivisionOperator : public SubExpression
 {
 public:
-	Divide(Expression* left, Expression* right) : SubExpression(left, right)
+	DivisionOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

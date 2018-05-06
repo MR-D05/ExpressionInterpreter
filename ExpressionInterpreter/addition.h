@@ -1,7 +1,7 @@
-class Addition : public SubExpression
+class AdditionOperator : public SubExpression
 {
 public:
-	Addition(Expression* left, Expression* right) : SubExpression(left, right)
+	AdditionOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

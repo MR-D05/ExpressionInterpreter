@@ -1,8 +1,8 @@
 #pragma once
-class Less : public SubExpression
+class LessOperator : public SubExpression
 {
 public:
-	Less(Expression* left, Expression* right) : SubExpression(left, right)
+	LessOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

@@ -1,8 +1,8 @@
 #pragma once
-class Greater : public SubExpression
+class GreaterOperator : public SubExpression
 {
 public:
-	Greater(Expression* left, Expression* right) : SubExpression(left, right)
+	GreaterOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

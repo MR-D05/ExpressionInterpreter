@@ -23,46 +23,44 @@ SubExpression::SubExpression(Expression* left, Expression* right)
 	this->right = right;
 }
 
-Expression* SubExpression::parse(stringstream& in)
+Expression* SubExpression::parse(stringstream& file)
 {
-	Expression* left;
-	Expression* right;
-	Expression* condition;
-	char operation, paren;
+	Expression* charFromLeft;
+	Expression* charFromRight;
+	Expression* conditionalOperator;
+	char operation;
+	char closeParenthesis;
+	char questionMark;
 
-	left = Operand::parse(in);
+	charFromLeft = Operand::parse(file);
 
-	in >> operation;
+	file >> operation;
 
-	if (operation == '!') {
-		in >> paren;
-		return new Not(left, nullptr);
+	if (inputIsNotOperator(operation)) {
+		file >> closeParenthesis;
+		return new NotOperator(charFromLeft, nullptr);
 
 	}
-	else if (operation == ':') {
-		right = Operand::parse(in);
-		in >> paren;
-		condition = Operand::parse(in);
-		in >> paren;
-		return new Conditional(left, right, condition);
+	else if (inputIsConditionalOperator(operation)) {
+		charFromRight = Operand::parse(file); file >> questionMark; conditionalOperator = Operand::parse(file); file >> closeParenthesis;
+		return new ConditionalOperator(charFromLeft, charFromRight, conditionalOperator);
 
 	}
 	else {
-
-		right = Operand::parse(in);
-		in >> paren;
+		charFromRight = Operand::parse(file);
+		file >> closeParenthesis;
 
 		switch (operation)
 		{
-		case '+': return new Addition(left, right);
-		case '-': return new Subtraction(left, right);
-		case '*': return new Multiplication(left, right);
-		case '/': return new Divide(left, right);
-		case '>': return new Greater(left, right);
-		case '<': return new Less(left, right);
-		case '=': return new Equals(left, right);
-		case '|': return new Pipe(left, right);
-		case '&': return new Ampersand(left, right);
+		case '+': return new AdditionOperator(charFromLeft, charFromRight);
+		case '-': return new SubtractionOperator(charFromLeft, charFromRight);
+		case '*': return new MultiplicationOperator(charFromLeft, charFromRight);
+		case '/': return new DivisionOperator(charFromLeft, charFromRight);
+		case '>': return new GreaterOperator(charFromLeft, charFromRight);
+		case '<': return new LessOperator(charFromLeft, charFromRight);
+		case '=': return new EqualsOperator(charFromLeft, charFromRight);
+		case '|': return new PipeOperator(charFromLeft, charFromRight);
+		case '&': return new AmpersandOperator(charFromLeft, charFromRight);
 		}
 	}
 	return nullptr;

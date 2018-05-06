@@ -20,24 +20,24 @@ using namespace std;
 #include "conditional.h"
 #include "not.h"
 
-Expression* Operand::parse(stringstream& in)
+Expression* Operand::parse(stringstream& file)
 {
 	char paren;
 	int value;
 
-	in >> ws;
-	if (isdigit(in.peek()))
+	file >> ws;
+	if (isdigit(file.peek()))
 	{
-		in >> value;
+		file >> value;
 		Expression* literal = new Literal(value);
 		return literal;
 	}
-	if (in.peek() == '(')
+	if (file.peek() == '(')
 	{
-		in >> paren;
-		return SubExpression::parse(in);
+		file >> paren;
+		return SubExpression::parse(file);
 	}
 	else
-		return new Variable(parseName(in));
+		return new Variable(parseName(file));
 	return nullptr;
 }

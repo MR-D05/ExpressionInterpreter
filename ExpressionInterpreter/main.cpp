@@ -15,51 +15,60 @@ using namespace std;
 
 SymbolTable symbolTable;
 
-void parseAssignments(stringstream& in);
+void parseAssignments(stringstream& file);
+
+std::ostream &output(std::ostream &os, int v) 
+{ 
+	switch (v) 
+	{ 
+	case 0: return os << "False"; 
+	case 1: return os << "True"; 
+	default: return os << v; 
+	}; 
+} 
 
 int main()
 {
+	fstream fin("expressions.txt");
 	const int chunk = 128;
-	Expression* expression;
-	char paren, comma, temp[chunk];
+	char start;
+	char comma;
+	char temp[chunk];
 
-	ifstream fin("expressions.txt");
+
+	Expression* expression;
+
+
 
 	while (true)
 	{
 		symbolTable.iterate();
 		fin.getline(temp, chunk);
-		if (!fin) break;
-
-		stringstream in(temp, ios_base::in);
-
-		in >> paren;
-		cout << temp << " ";
-
-		try
-		{
-			expression = SubExpression::parse(in);
-			in >> comma;
-			parseAssignments(in);
-			cout << "Value = " << expression->evaluate() << endl;
-		}
-		catch (exception) {
-			return EXIT_FAILURE;
-		}
+		if (fin.fail()) break;
+		stringstream file(temp, ios_base::in);
+		file >> start;
+		cout << temp;
+		cout << " ";
+		expression = SubExpression::parse(file);
+		file >> comma;
+		parseAssignments(file);
+		cout << "Value = ";
+		output(cout, (expression->evaluate()));
+		cout << endl;
 	}
 	std::system("pause");
 	return 0;
 }
 
-void parseAssignments(stringstream& in)
+void parseAssignments(stringstream& file)
 {
 	char assignop, delimiter;
 	string variable;
 	int value;
 	do
 	{
-		variable = parseName(in);
-		in >> ws >> assignop >> value >> delimiter;
+		variable = parseName(file);
+		file >> ws >> assignop >> value >> delimiter;
 		symbolTable.insert(variable, value);
 	} while (delimiter == ',');
 }

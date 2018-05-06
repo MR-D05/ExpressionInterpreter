@@ -1,8 +1,8 @@
 #pragma once
-class Equals : public SubExpression
+class EqualsOperator : public SubExpression
 {
 public:
-	Equals(Expression* left, Expression* right) : SubExpression(left, right)
+	EqualsOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

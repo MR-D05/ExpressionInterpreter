@@ -1,8 +1,8 @@
 #pragma once
-class Conditional : public SubExpression
+class ConditionalOperator : public SubExpression
 {
 public:
-	Conditional(Expression* left, Expression* right, Expression* condition) : SubExpression(left, right)
+	ConditionalOperator(Expression* left, Expression* right, Expression* condition) : SubExpression(left, right)
 	{
 		this->condition = condition;
 	}

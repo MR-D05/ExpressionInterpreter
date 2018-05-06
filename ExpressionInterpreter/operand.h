@@ -2,5 +2,5 @@
 class Operand : public Expression
 {
 public:
-	static Expression* parse(stringstream& in);
+	static Expression* parse(stringstream& file);
 };

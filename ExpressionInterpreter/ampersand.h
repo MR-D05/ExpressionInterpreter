@@ -1,8 +1,8 @@
 #pragma once
-class Ampersand : public SubExpression
+class AmpersandOperator : public SubExpression
 {
 public:
-	Ampersand(Expression* left, Expression* right) : SubExpression(left, right)
+	AmpersandOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

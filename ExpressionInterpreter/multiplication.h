@@ -1,8 +1,8 @@
 #pragma once
-class Multiplication : public SubExpression
+class MultiplicationOperator : public SubExpression
 {
 public:
-	Multiplication(Expression* left, Expression* right) : SubExpression(left, right)
+	MultiplicationOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()

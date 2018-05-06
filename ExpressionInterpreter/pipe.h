@@ -1,8 +1,8 @@
 #pragma once
-class Pipe : public SubExpression
+class PipeOperator : public SubExpression
 {
 public:
-	Pipe(Expression* left, Expression* right) : SubExpression(left, right)
+	PipeOperator(Expression* left, Expression* right) : SubExpression(left, right)
 	{
 	}
 	int evaluate()
